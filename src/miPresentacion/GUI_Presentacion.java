@@ -40,25 +40,24 @@ public class GUI_Presentacion extends JFrame {
 
         miFoto = new JButton("Este soy yo");
         miFoto.addMouseListener(escucha);
+        miFoto.addKeyListener(escucha);
         miHobby = new JButton("Mis Hobbies");
         miHobby.addMouseListener(escucha);
+        miHobby.addKeyListener(escucha);
         misExpectativas = new JButton("Mis expectativas");
-        //misExpectativas.addKeyListener(escucha);
-       //misExpectativas.setFocusable(true);
+        misExpectativas.addKeyListener(escucha);
+
         panelBotones = new JPanel();
         panelBotones.add(miFoto);
         panelBotones.add(miHobby);
         panelBotones.add(misExpectativas);
         panelBotones.addKeyListener(escucha);
         panelBotones.setFocusable(true);
-
         this.add(panelBotones, BorderLayout.SOUTH);
 
         labelImage = new JLabel();
         texto = new JTextArea(10, 20);
         texto.setEditable(false);
-
-
     }
 
     public static void main(String[] args) {
@@ -71,12 +70,12 @@ public class GUI_Presentacion extends JFrame {
         });
     }
 
-    private class Escucha implements MouseListener, KeyListener {
+    private class Escucha extends MouseAdapter implements KeyListener{
         private ImageIcon image;
         @Override
         public void mouseClicked(MouseEvent e) {
             panelDatos.removeAll();
-            if(e.getSource() == miFoto&& e.getClickCount() == 1){
+            if(e.getSource() == miFoto){
                 image = new ImageIcon(getClass().getResource("/recursos/imagen1.png"));
                 labelImage.setIcon(image);
                 panelDatos.add(labelImage);
@@ -93,34 +92,10 @@ public class GUI_Presentacion extends JFrame {
                             "animes de romance");
                     texto.setBackground(Color.GRAY);
                     panelDatos.add(texto);
-                }else{
-
-
-
                 }
             }
             revalidate();
             repaint();
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-
         }
 
         @Override
@@ -137,8 +112,6 @@ public class GUI_Presentacion extends JFrame {
                         "esos conocimientos en cosas que me gusten.");
                 texto.setBackground(null);
                 panelDatos.add(texto);
-            }else{
-
             }
             revalidate();
             repaint();
@@ -149,44 +122,6 @@ public class GUI_Presentacion extends JFrame {
         public void keyReleased(KeyEvent e) {
 
         }
-
-
-
-        /*
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            //JOptionPane.showMessageDialog(null, "oprimiste un");
-            panelDatos.removeAll();
-            if(e.getSource()==miFoto){
-                image = new ImageIcon(getClass().getResource("/recursos/imagen1.png"));
-                labelImage.setIcon(image);
-                panelDatos.add(labelImage);
-                texto.setText("Soy una persona timida, al igual que los erizos,\n" +
-                        "por eso me gustan mucho.");
-                texto.setBackground(Color.GRAY);
-                panelDatos.add(texto);
-            }else{
-                if(e.getSource()==miHobby){
-                    image = new ImageIcon(getClass().getResource("/recursos/imagen2.jfif"));
-                    labelImage.setIcon(image);
-                    panelDatos.add(labelImage);
-                    texto.setText("Me gusta mucho ver anime, especialmente\n" +
-                            "animes de romance");
-                    texto.setBackground(Color.GRAY);
-                    panelDatos.add(texto);
-                }else{
-                    texto.setText("Hay muchas cosas que no se... pero aun asi\n" +
-                            "espero aprender poco a poco para poder aplicar\n" +
-                            "esos conocimientos en cosas que me gusten.");
-                    texto.setBackground(null);
-                    panelDatos.add(texto);
-                }
-            }
-            revalidate();
-            repaint();
-        }
-        */
-
     }
 }
 
