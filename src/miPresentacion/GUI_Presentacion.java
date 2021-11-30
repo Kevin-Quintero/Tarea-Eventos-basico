@@ -3,8 +3,7 @@ package miPresentacion;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class GUI_Presentacion extends JFrame {
     //Atributos
@@ -40,21 +39,24 @@ public class GUI_Presentacion extends JFrame {
         this.add(panelDatos, BorderLayout.CENTER);
 
         miFoto = new JButton("Este soy yo");
-        miFoto.addActionListener(escucha);
+        miFoto.addMouseListener(escucha);
         miHobby = new JButton("Mis Hobbies");
-        miHobby.addActionListener(escucha);
+        miHobby.addMouseListener(escucha);
         misExpectativas = new JButton("Mis expectativas");
-        misExpectativas.addActionListener(escucha);
-
+        //misExpectativas.addKeyListener(escucha);
+       //misExpectativas.setFocusable(true);
         panelBotones = new JPanel();
         panelBotones.add(miFoto);
         panelBotones.add(miHobby);
         panelBotones.add(misExpectativas);
+        panelBotones.addKeyListener(escucha);
+        panelBotones.setFocusable(true);
 
         this.add(panelBotones, BorderLayout.SOUTH);
 
         labelImage = new JLabel();
-        texto= new JTextArea(10, 20);
+        texto = new JTextArea(10, 20);
+        texto.setEditable(false);
 
 
     }
@@ -69,8 +71,88 @@ public class GUI_Presentacion extends JFrame {
         });
     }
 
-    private class Escucha implements ActionListener{
+    private class Escucha implements MouseListener, KeyListener {
         private ImageIcon image;
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            panelDatos.removeAll();
+            if(e.getSource() == miFoto&& e.getClickCount() == 1){
+                image = new ImageIcon(getClass().getResource("/recursos/imagen1.png"));
+                labelImage.setIcon(image);
+                panelDatos.add(labelImage);
+                texto.setText("Soy una persona timida, al igual que los erizos,\n" +
+                        "por eso me gustan mucho.");
+                texto.setBackground(Color.GRAY);
+                panelDatos.add(texto);
+            }else{
+                if(e.getSource() == miHobby && e.getClickCount() == 2){
+                    image = new ImageIcon(getClass().getResource("/recursos/imagen2.jfif"));
+                    labelImage.setIcon(image);
+                    panelDatos.add(labelImage);
+                    texto.setText("Me gusta mucho ver anime, especialmente\n" +
+                            "animes de romance");
+                    texto.setBackground(Color.GRAY);
+                    panelDatos.add(texto);
+                }else{
+
+
+
+                }
+            }
+            revalidate();
+            repaint();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            panelDatos.removeAll();
+            if(e.getKeyChar() == KeyEvent.VK_M){
+                texto.setText("Hay muchas cosas que no se... pero aun asi\n" +
+                        "espero aprender poco a poco para poder aplicar\n" +
+                        "esos conocimientos en cosas que me gusten.");
+                texto.setBackground(null);
+                panelDatos.add(texto);
+            }else{
+
+            }
+            revalidate();
+            repaint();
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
+
+
+
+        /*
         @Override
         public void actionPerformed(ActionEvent e) {
             //JOptionPane.showMessageDialog(null, "oprimiste un");
@@ -103,6 +185,8 @@ public class GUI_Presentacion extends JFrame {
             revalidate();
             repaint();
         }
+        */
+
     }
 }
 
