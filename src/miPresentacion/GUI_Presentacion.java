@@ -12,13 +12,15 @@ public class GUI_Presentacion extends JFrame {
     private Titulos titulo;
     private JLabel labelImage;
     private JTextArea texto;
+    private JTextArea texto2;
+    private JTextArea texto3;
     private Escucha escucha;
     //Metodos
     public GUI_Presentacion() {
         initGUI();
         //Configuracion base de la ventana
         this.setTitle("MiPresentacion");
-        this.setSize(1280,800);
+        this.setSize(1480,900);
         setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,6 +60,10 @@ public class GUI_Presentacion extends JFrame {
         labelImage = new JLabel();
         texto = new JTextArea(10, 20);
         texto.setEditable(false);
+        texto2 = new JTextArea(10, 35);
+        texto2.setEditable(false);
+        texto3 = new JTextArea(10, 35);
+        texto3.setEditable(false);
     }
 
     public static void main(String[] args) {
@@ -79,7 +85,8 @@ public class GUI_Presentacion extends JFrame {
                 image = new ImageIcon(getClass().getResource("/recursos/imagen1.png"));
                 labelImage.setIcon(image);
                 panelDatos.add(labelImage);
-                texto.setText("Soy una persona timida, al igual que los erizos,\n" +
+                texto.setText("Mi nombre es Kevin Andres Quintero Trochez.\n" +
+                        "Soy una persona timida, al igual que los erizos,\n" +
                         "por eso me gustan mucho.");
                 texto.setBackground(Color.GRAY);
                 panelDatos.add(texto);
@@ -88,10 +95,9 @@ public class GUI_Presentacion extends JFrame {
                     image = new ImageIcon(getClass().getResource("/recursos/imagen2.jfif"));
                     labelImage.setIcon(image);
                     panelDatos.add(labelImage);
-                    texto.setText("Me gusta mucho ver anime, especialmente\n" +
-                            "animes de romance");
-                    texto.setBackground(Color.GRAY);
-                    panelDatos.add(texto);
+                    texto2.setText("Me gusta mucho ver anime, especialmente los animes de romance");
+                    texto2.setBackground(Color.RED);
+                    panelDatos.add(texto2);
                 }
             }
             revalidate();
@@ -100,21 +106,20 @@ public class GUI_Presentacion extends JFrame {
 
         @Override
         public void keyTyped(KeyEvent e) {
-
+            panelDatos.removeAll();
+            if(e.getKeyChar() == KeyEvent.VK_M){
+                texto3.setText("Hay muchas cosas que no se... pero aun asi\n" +
+                        "espero aprender poco a poco para poder aplicar\n" +
+                        "esos conocimientos en cosas que me gusten.");
+                texto3.setBackground(null);
+                panelDatos.add(texto3);
+            }
+            revalidate();
+            repaint();
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
-            panelDatos.removeAll();
-            if(e.getKeyChar() == KeyEvent.VK_M){
-                texto.setText("Hay muchas cosas que no se... pero aun asi\n" +
-                        "espero aprender poco a poco para poder aplicar\n" +
-                        "esos conocimientos en cosas que me gusten.");
-                texto.setBackground(null);
-                panelDatos.add(texto);
-            }
-            revalidate();
-            repaint();
 
         }
 
